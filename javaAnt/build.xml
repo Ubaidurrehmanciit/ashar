@@ -1,0 +1,32 @@
+<project name="javaAnt" basedir="." default="clean">
+	
+	<property name="src.dir" location="src"></property>
+	<property name="build.dir" location="bin"></property>
+	<property name="dist.dir" location="dist"></property>
+	<property name="docs.dir" location="docs"></property>
+	
+	<target name="clean">
+		<delete dir="${build.dir}"></delete>
+		<delete dir="${docs.dir}"></delete>
+		<delete dir="${dist.dir}"></delete>
+	</target>
+	
+	<target name="make">
+		<mkdir dir="${build.dir}"/>
+		<mkdir dir="${docs.dir}"/>
+		<mkdir dir="${dist.dir}"/>
+	</target>
+	
+	<target name="compile" depends="clean,make">
+		<javac srcdir="${src.dir}" destdir="${build.dir}" />
+	</target>
+	
+	<target name="docs" depends="compile">
+		<javadoc packagenames="src" sourcepath="${src.dir}" destdir="${docs.dir}">
+			<fileset dir="${src.dir}">
+			<include name="**"/>
+			</fileset>
+		</javadoc>
+	</target>
+	
+</project>	
